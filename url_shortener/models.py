@@ -15,7 +15,9 @@ class Link(db.Model):
         self.short_url = self.generate_short_link()
 
     def generate_short_link(self):
-        characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        characters = (
+            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        )
         short_url = ''.join(choices(characters, k=6))
 
         link = self.query.filter_by(short_url=short_url).first()
@@ -24,3 +26,9 @@ class Link(db.Model):
             return self.generate_short_link()
 
         return short_url
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(12), unique=True)
+    password = db.Column(db.String(24), nullable=False)

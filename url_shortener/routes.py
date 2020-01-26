@@ -4,6 +4,8 @@ from flask import request
 from flask import redirect
 from . extensions import db
 from . models import Link
+from . auth import load_logged_in_user
+from . auth import login_required
 
 short = Blueprint('short', __name__)
 
@@ -17,20 +19,27 @@ def redirect_to_url(short_url):
 
 
 @short.route("/")
+@login_required
 def index():
     return render_template('index.html')
 
 
 @short.route("/add_link", methods=["POST"])
+@login_required
 def add_link():
     original_url = request.form['original_url']
     link = Link(original_url=original_url)
     db.session.add(link)
     db.session.commit()
-    return render_template('link_added.html', new_link=link.short_url, original_url=link.original_url)
+    return render_template(
+        'link_added.html',
+        new_link=link.short_url,
+        original_url=link.original_url
+        )
 
 
 @short.route("/stats")
+@login_required
 def stats():
     links = Link.query.all()
     return render_template('stats.html', links=links)

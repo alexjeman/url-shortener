@@ -8,7 +8,7 @@
 </head>
 <body>
     {% for link in links %}
-    Full url: {{ link.original_url }} - Short url: {{ link.short_url }} - Visits: {{ link.visits }} <br />
+    Full url: {{ link.original_url }} - Short url: {{ url_for('short.redirect_to_url', short_url=link.short_url, _external=True) }} - Visits: {{ link.visits }} <br />
     {% endfor %}
 </body>
 </html>
