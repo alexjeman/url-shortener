@@ -1,6 +1,6 @@
 from flask import Flask
-from .extensions import db
-from .routes import short
+from . extensions import db
+from . routes import short
 
 
 def create_app(config_file='settings.py'):

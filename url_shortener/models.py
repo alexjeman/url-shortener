@@ -1,4 +1,4 @@
-from .extensions import db
+from . extensions import db
 from datetime import datetime
 from random import choices
 
@@ -15,8 +15,7 @@ class Link(db.Model):
         self.short_url = self.generate_short_link()
 
     def generate_short_link(self):
-        characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRST\
-            UVWXYZ"
+        characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         short_url = ''.join(choices(characters, k=6))
 
         link = self.query.filter_by(short_url=short_url).first()
