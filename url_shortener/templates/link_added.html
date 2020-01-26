@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Short Link Generated</title>
+</head>
+<body>
+    Full link: {{ original_url }} <br />
+    Short link: {{ url_for('short.redirect_to_url', short_url=new_link, _external=True) }}
+</body>
+</html>
